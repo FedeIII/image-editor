@@ -1,15 +1,12 @@
-import { Cursor, ToolInterface } from "./interfaces/editorElements";
-
-export const NO_TOOL = "no-tool";
-export const COLOR_PICKER = "color-picker";
+import { Cursor, ToolInterface, ToolName } from "./interfaces/editorElements";
 
 export class Tool implements ToolInterface {
-  name: string;
+  name: ToolName;
   cursor: Cursor;
   label: string;
   el: HTMLElement;
 
-  constructor(name: string, cursor: Cursor, label: string) {
+  constructor(name: ToolName, cursor: Cursor, label: string) {
     this.name = name;
     this.cursor = cursor;
     this.label = label;
@@ -37,5 +34,13 @@ export class Tool implements ToolInterface {
     wrapper.appendChild(tooltip);
 
     return wrapper;
+  }
+
+  selectTool(): void {
+    this.el.classList.add("tooltip--selected");
+  }
+
+  deselectTool(): void {
+    this.el.classList.remove("tooltip--selected");
   }
 }

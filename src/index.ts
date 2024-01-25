@@ -1,6 +1,6 @@
 import { Editor } from "./editor";
-import { Cursor } from "./interfaces/editorElements";
-import { COLOR_PICKER, NO_TOOL, Tool } from "./tools";
+import { Cursor, ToolName } from "./interfaces/editorElements";
+import { Tool } from "./tools";
 
 const MAX_WIDTH = 4000;
 const MAX_HEIGHT = 4000;
@@ -26,12 +26,16 @@ const editor = new Editor(toolsEl);
 const noToolCursor: Cursor = {
   img: "public/img/cursor.svg",
 };
-const noTool = new Tool(NO_TOOL, noToolCursor, "No tool");
+const noTool = new Tool(ToolName.NO_TOOL, noToolCursor, "No tool");
 editor.addTool(noTool);
 
 // COLOR PICKER
 const colorPickerCursor: Cursor = {
   img: "public/img/IconColorPicker.svg",
 };
-const colorPicker = new Tool(COLOR_PICKER, colorPickerCursor, "Color picker");
+const colorPicker = new Tool(
+  ToolName.COLOR_PICKER,
+  colorPickerCursor,
+  "Color picker"
+);
 editor.addTool(colorPicker);

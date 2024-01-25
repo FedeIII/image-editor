@@ -1,10 +1,11 @@
 import { EditorInterface, EditorTools } from "./interfaces/editor";
-import { COLOR_PICKER, NO_TOOL, Tool } from "./tools";
+import { ToolName } from "./interfaces/editorElements";
+import { Tool } from "./tools";
 
 export class Editor implements EditorInterface {
   toolsEl: HTMLElement;
   tools: EditorTools = {};
-  currentTool: string | null = null;
+  currentTool: ToolName = ToolName.NO_TOOL;
 
   constructor(toolsEl: HTMLElement) {
     this.toolsEl = toolsEl;
@@ -22,22 +23,20 @@ export class Editor implements EditorInterface {
     }
   }
 
-  #setCurrentTool(tool: string) {
+  #setCurrentTool(tool: ToolName): void {
     this.currentTool = tool;
     this.update();
   }
 
-  update() {
-    switch (this.currentTool) {
-      case NO_TOOL:
-        console.log("no tool");
-        break;
-      case COLOR_PICKER:
-        console.log("color picker");
-        break;
-
-      default:
-        break;
+  #deselectTools(): void {
+    for (let toolName in this.tools) {
+      this.tools[toolName].deselectTool();
     }
+  }
+
+  update() {
+    this.#deselectTools();
+
+    this.tools[this.currentTool].selectTool();
   }
 }
