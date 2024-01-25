@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Dropper</title>
+    <style>
+      :root {
+        --gap-big: 32px;
+        --gap-mid: 16px;
+        --gap-small: 8px;
+
+        --color-base: white;
+        --color-modal-bg: #13151c;
+        --color-text: black;
+        --color-text-negative: white;
+      }
+
+      .app {
+        background-color: var(--color-base);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+      }
+
+      .menu {
+        padding: var(--gap-mid) var(--gap-big);
+      }
+
+      .canvas--color-picker {
+        cursor:
+          url("public/img/screenshotselection.svg") 16 16,
+          pointer;
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: max-content;
+        background-color: var(--color-modal-bg);
+        color: var(--color-text-negative);
+        text-align: center;
+        border-radius: 4px;
+        padding: 4px 8px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }
+
+      .tools {
+        display: flex;
+        flex-direction: row;
+        column-gap: var(--gap-small);
+      }
+
+      .tool-icon:hover {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" class="app">
+      <div class="menu">
+        <div class="tools">
+          <span class="tooltip" id="no-tool">
+            <img src="public/img/cursor.svg" class="tool-icon" alt="No tool" />
+            <span class="tooltiptext">No tool</span>
+          </span>
+          <span class="tooltip" id="color-picker">
+            <img
+              src="public/img/IconColorPicker.svg"
+              class="tool-icon"
+              alt="Color picker"
+            />
+            <span class="tooltiptext">Color Picker</span>
+          </span>
+        </div>
+      </div>
+      <canvas id="canvas" class="canvas"></canvas>
+    </div>
+    <script src="dist/index.js"></script>
+  </body>
+</html>
