@@ -20,7 +20,8 @@ img.addEventListener("load", function () {
 
 // EDITOR
 const toolsEl = <HTMLCanvasElement>document.getElementById("tools");
-const editor = new Editor(toolsEl);
+const canvasEl = <HTMLCanvasElement>document.getElementById("canvas");
+const editor = new Editor(toolsEl, canvasEl);
 
 // NO TOOL
 const noToolCursor: Cursor = {

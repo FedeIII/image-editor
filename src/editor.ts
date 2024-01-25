@@ -4,11 +4,13 @@ import { Tool } from "./tools";
 
 export class Editor implements EditorInterface {
   toolsEl: HTMLElement;
+  canvasEl: HTMLElement;
   tools: EditorTools = {};
   currentTool: ToolName = ToolName.NO_TOOL;
 
-  constructor(toolsEl: HTMLElement) {
+  constructor(toolsEl: HTMLElement, canvasEl: HTMLElement) {
     this.toolsEl = toolsEl;
+    this.canvasEl = canvasEl;
   }
 
   addTool(tool: Tool) {
@@ -38,5 +40,15 @@ export class Editor implements EditorInterface {
     this.#deselectTools();
 
     this.tools[this.currentTool].selectTool();
+
+    switch (this.currentTool) {
+      case ToolName.COLOR_PICKER:
+        this.canvasEl.classList.add("canvas--color-picker");
+        break;
+
+      default:
+        this.canvasEl.className = "canvas";
+        break;
+    }
   }
 }
