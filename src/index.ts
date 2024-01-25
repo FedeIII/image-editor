@@ -18,20 +18,20 @@ img.addEventListener("load", function () {
   ctx.drawImage(img, 0, 0);
 });
 
-const editor = new Editor();
+// EDITOR
+const toolsEl = <HTMLCanvasElement>document.getElementById("tools");
+const editor = new Editor(toolsEl);
 
 // NO TOOL
-const noToolEl = <HTMLElement>document.getElementById("no-tool");
 const noToolCursor: Cursor = {
-  img: null,
+  img: "public/img/cursor.svg",
 };
-const noTool = new Tool(NO_TOOL, noToolEl, noToolCursor);
+const noTool = new Tool(NO_TOOL, noToolCursor, "No tool");
 editor.addTool(noTool);
 
 // COLOR PICKER
-const colorPickerEl = <HTMLElement>document.getElementById("color-picker");
 const colorPickerCursor: Cursor = {
   img: "public/img/IconColorPicker.svg",
 };
-const colorPicker = new Tool(COLOR_PICKER, colorPickerEl, colorPickerCursor);
+const colorPicker = new Tool(COLOR_PICKER, colorPickerCursor, "Color picker");
 editor.addTool(colorPicker);

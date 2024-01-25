@@ -4,6 +4,6 @@ export interface Cursor {
 
 export interface ToolInterface {
   name: string;
-  el: HTMLElement;
   cursor: Cursor;
+  label: string;
 }

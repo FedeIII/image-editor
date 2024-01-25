@@ -5,6 +5,7 @@ export interface EditorTools {
 }
 
 export interface EditorInterface {
+  toolsEl: HTMLElement;
   tools: EditorTools;
   currentTool: string | null;
 
