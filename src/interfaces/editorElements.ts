@@ -18,6 +18,7 @@ export interface ToolInterface {
   undrag(): void;
   setUse(callback: (event: MouseEvent) => string | null): void;
   getCursorStyle(toolText: string | null): string;
+  setClear(callback: () => void): void;
 }
 
 export enum ToolName {

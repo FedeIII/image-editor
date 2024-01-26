@@ -89,4 +89,7 @@ colorPicker.setUse((event: MouseEvent) => {
 
   return rgbToHex(imageData[0], imageData[1], imageData[2]);
 });
+colorPicker.setClear(() => {
+  lensEl.style.display = "none";
+});
 editor.addTool(colorPicker);

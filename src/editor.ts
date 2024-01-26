@@ -119,7 +119,6 @@ export class Editor implements EditorInterface {
 
     tool.undrag();
     this.#canvasEl.style.cursor = tool.getCursorStyle(null);
-    this.#lensEl.style.display = "none";
   }
 
   update() {
