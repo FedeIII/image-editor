@@ -12,10 +12,11 @@ export interface ToolInterface {
 
   selectTool(): void;
   deselectTool(): void;
-  drag(x: number, y: number): string | null;
-  move(x: number, y: number): string | null;
+  drag(event: MouseEvent): string | null;
+  move(event: MouseEvent): string | null;
+  isDragging(): boolean;
   undrag(): void;
-  setUse(callback: (x: number, y: number) => string | null): void;
+  setUse(callback: (event: MouseEvent) => string | null): void;
   getCursorStyle(toolText: string | null): string;
 }
 

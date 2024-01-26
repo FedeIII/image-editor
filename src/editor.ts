@@ -8,6 +8,7 @@ export class Editor implements EditorInterface {
   #toolsEl: HTMLElement;
   #toolDataEl: HTMLElement;
   #canvasEl: HTMLCanvasElement;
+  #lensEl: HTMLCanvasElement;
   #ctx: CanvasRenderingContext2D;
 
   #tools: EditorTools = {};
@@ -17,12 +18,14 @@ export class Editor implements EditorInterface {
     inputEl: HTMLElement,
     toolsEl: HTMLElement,
     toolDataEl: HTMLElement,
-    canvasEl: HTMLCanvasElement
+    canvasEl: HTMLCanvasElement,
+    lensEl: HTMLCanvasElement
   ) {
     this.#inputEl = inputEl;
     this.#toolsEl = toolsEl;
     this.#toolDataEl = toolDataEl;
     this.#canvasEl = canvasEl;
+    this.#lensEl = lensEl;
     this.#ctx = <CanvasRenderingContext2D>canvasEl.getContext("2d");
 
     this.#setEventListeners();
@@ -37,20 +40,18 @@ export class Editor implements EditorInterface {
 
     this.#canvasEl.addEventListener(
       "mousedown",
-      (event: MouseEvent) =>
-        this.#dragCurrentToolAt(event.offsetX, event.offsetY),
-      false
+      this.#dragCurrentToolAt.bind(this),
+      true
     );
     this.#canvasEl.addEventListener(
       "mousemove",
-      (event: MouseEvent) =>
-        this.#moveCurrentToolAt(event.offsetX, event.offsetY),
-      false
+      this.#moveCurrentToolAt.bind(this),
+      true
     );
     this.#canvasEl.addEventListener(
       "mouseup",
       this.#undragCurrentTool.bind(this),
-      false
+      true
     );
   }
 
@@ -86,7 +87,7 @@ export class Editor implements EditorInterface {
 
     loadFile(target.files).then((img: HTMLImageElement) => {
       this.#ctx.clearRect(0, 0, this.#canvasEl.width, this.#canvasEl.height);
-      this.#ctx.drawImage(img, 0, 0);
+      this.#ctx.drawImage(img, 0, 0, img.width, img.height);
     });
   }
 
@@ -97,18 +98,18 @@ export class Editor implements EditorInterface {
     }
   }
 
-  #dragCurrentToolAt(x: number, y: number): void {
+  #dragCurrentToolAt(event: MouseEvent): void {
     const tool: ToolInterface = this.#getSelectedTool();
 
-    const toolText = tool.drag(x, y);
+    const toolText = tool.drag(event);
     this.#updateToolInfo(toolText);
     this.#canvasEl.style.cursor = tool.getCursorStyle(toolText);
   }
 
-  #moveCurrentToolAt(x: number, y: number): void {
+  #moveCurrentToolAt(event: MouseEvent): void {
     const tool: ToolInterface = this.#getSelectedTool();
 
-    const toolText = tool.move(x, y);
+    const toolText = tool.move(event);
     this.#updateToolInfo(toolText);
     this.#canvasEl.style.cursor = tool.getCursorStyle(toolText);
   }
@@ -118,6 +119,7 @@ export class Editor implements EditorInterface {
 
     tool.undrag();
     this.#canvasEl.style.cursor = tool.getCursorStyle(null);
+    this.#lensEl.style.display = "none";
   }
 
   update() {

@@ -7,7 +7,7 @@ export class Tool implements ToolInterface {
   el: HTMLElement;
 
   #isDrag: boolean = false;
-  #useCallback: null | ((x: number, y: number) => string | null) = null;
+  #useCallback: null | ((event: MouseEvent) => string | null) = null;
 
   constructor(name: ToolName, cursor: Cursor, label: string) {
     this.name = name;
@@ -38,13 +38,13 @@ export class Tool implements ToolInterface {
 
     return wrapper;
   }
-  
-  #isDragging(): boolean {
+
+  isDragging(): boolean {
     return this.#isDrag;
   }
 
-  #useAt(x: number, y: number): string | null {
-    return this.#useCallback?.(x, y) || null;
+  #useAt(event: MouseEvent): string | null {
+    return this.#useCallback?.(event) || null;
   }
 
   selectTool(): void {
@@ -55,14 +55,14 @@ export class Tool implements ToolInterface {
     this.el.classList.remove("tooltip--selected");
   }
 
-  drag(x: number, y: number): string | null {
+  drag(event: MouseEvent): string | null {
     this.#isDrag = true;
-    return this.#useAt(x, y);
+    return this.#useAt(event);
   }
 
-  move(x: number, y: number): string | null {
-    if (this.#isDragging()) {
-      return this.#useAt(x, y);
+  move(event: MouseEvent): string | null {
+    if (this.isDragging()) {
+      return this.#useAt(event);
     }
     return null;
   }
@@ -71,7 +71,7 @@ export class Tool implements ToolInterface {
     this.#isDrag = false;
   }
 
-  setUse(callback: (x: number, y: number) => string | null): void {
+  setUse(callback: (event: MouseEvent) => string | null): void {
     this.#useCallback = callback;
   }
 

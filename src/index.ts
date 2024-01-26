@@ -2,22 +2,26 @@ import { Editor } from "./editor";
 import { Cursor, ToolName } from "./interfaces/editorElements";
 import { rgbToHex } from "./utils";
 import { Tool } from "./tools";
-
-const MAX_WIDTH = 1920;
-const MAX_HEIGHT = 1080;
+import {
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  LENS_HEIGHT,
+  LENS_WIDTH,
+  LENS_ZOOM,
+} from "./config";
 
 const inputEl = <HTMLElement>document.getElementById("input");
 
 const canvasEl = <HTMLCanvasElement>document.getElementById("canvas");
-canvasEl.width = MAX_WIDTH;
-canvasEl.height = MAX_HEIGHT;
-
 const ctx = <CanvasRenderingContext2D>canvasEl.getContext("2d");
+
+const lensEl = <HTMLCanvasElement>document.getElementById("lens");
+const lensCtx = <CanvasRenderingContext2D>lensEl.getContext("2d");
 
 // EDITOR
 const toolsEl = <HTMLCanvasElement>document.getElementById("tools");
 const toolDataEl = <HTMLCanvasElement>document.getElementById("tool-data");
-const editor = new Editor(inputEl, toolsEl, toolDataEl, canvasEl);
+const editor = new Editor(inputEl, toolsEl, toolDataEl, canvasEl, lensEl);
 
 // NO TOOL
 const noToolCursor: Cursor = {
@@ -36,10 +40,37 @@ const colorPicker = new Tool(
   colorPickerCursor,
   "Color picker"
 );
-colorPicker.setUse((x: number, y: number) => {
+
+function showLens(event: MouseEvent): void {
+  const x = event.offsetX;
+  const y = event.offsetY;
+
+  lensCtx.fillRect(0, 0, lensEl.width, lensEl.height);
+  lensCtx.drawImage(
+    canvasEl,
+    (CANVAS_WIDTH * x) / canvasEl.clientWidth - LENS_WIDTH / LENS_ZOOM / 2,
+    (CANVAS_HEIGHT * y) / canvasEl.clientHeight - LENS_WIDTH / LENS_ZOOM / 2,
+    LENS_WIDTH / LENS_ZOOM,
+    LENS_HEIGHT / LENS_ZOOM,
+    0,
+    0,
+    LENS_WIDTH,
+    LENS_HEIGHT
+  );
+  lensEl.style.top = event.pageY - 64 + "px";
+  lensEl.style.left = event.pageX - 64 + "px";
+  lensEl.style.display = "block";
+}
+
+colorPicker.setUse((event: MouseEvent) => {
+  const x = event.offsetX;
+  const y = event.offsetY;
+
+  showLens(event);
+
   const imageData = ctx.getImageData(
-    (1920 * x) / window.innerWidth,
-    (1080 * y) / window.innerHeight,
+    (CANVAS_WIDTH * x) / canvasEl.clientWidth,
+    (CANVAS_HEIGHT * y) / canvasEl.clientHeight,
     1,
     1
   ).data;

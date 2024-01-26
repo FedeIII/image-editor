@@ -6,9 +6,12 @@
     <title>Color Dropper</title>
     <style>
       :root {
+        --gap-huge: 64px;
         --gap-big: 32px;
         --gap-mid: 16px;
         --gap-small: 8px;
+        --gap-tiny: 4px;
+        --gap-xtiny: 2px;
 
         --color-base: white;
         --color-modal-bg: #13151c;
@@ -27,10 +30,12 @@
 
       .menu {
         padding: var(--gap-mid) var(--gap-big);
+        margin: 0 var(--gap-huge);
       }
 
       .canvas {
         position: relative;
+        margin: 0 var(--gap-huge) var(--gap-huge) var(--gap-huge);
       }
 
       .canvas--color-picker {
@@ -42,7 +47,7 @@
       .tooltip {
         position: relative;
         display: inline-block;
-        padding: 2px;
+        padding: var(--gap-xtiny);
       }
 
       .tooltip .tooltiptext {
@@ -52,7 +57,7 @@
         color: var(--color-text-negative);
         text-align: center;
         border-radius: 4px;
-        padding: 4px 8px;
+        padding: var(--gap-tiny) var(--gap-small);
         position: absolute;
         z-index: 1;
         top: -130%;
@@ -91,6 +96,14 @@
         left: 50%;
         font-weight: bold;
       }
+
+      .lens {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -102,7 +115,8 @@
           <div id="tool-data" class="tool-data"></div>
         </div>
       </div>
-      <canvas id="canvas" class="canvas"></canvas>
+      <canvas id="canvas" width="1920" height="1080" class="canvas"></canvas>
+      <canvas id="lens" width="128" height="128" class="lens"></canvas>
     </div>
     <script src="dist/index.js"></script>
   </body>
