@@ -5,11 +5,6 @@ export interface EditorTools {
 }
 
 export interface EditorInterface {
-  toolsEl: HTMLElement;
-  canvasEl: HTMLElement;
-  tools: EditorTools;
-  currentTool: string | null;
-
   addTool(tool: ToolInterface): void;
   update(): void;
 }

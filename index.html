@@ -22,10 +22,15 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
+        font-family: monospace;
       }
 
       .menu {
         padding: var(--gap-mid) var(--gap-big);
+      }
+
+      .canvas {
+        position: relative;
       }
 
       .canvas--color-picker {
@@ -62,6 +67,14 @@
         background-color: lightgray;
       }
 
+      .file-input {
+        padding: var(--gap-small) var(--gap-mid);
+      }
+
+      .tool-bar {
+        position: relative;
+      }
+
       .tools {
         display: flex;
         flex-direction: row;
@@ -71,12 +84,23 @@
       .tool-icon:hover {
         cursor: pointer;
       }
+
+      .tool-data {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <div id="root" class="app">
       <div class="menu">
-        <div id="tools" class="tools"></div>
+        <input type="file" id="input" class="file-input" />
+        <div class="tool-bar">
+          <div id="tools" class="tools"></div>
+          <div id="tool-data" class="tool-data"></div>
+        </div>
       </div>
       <canvas id="canvas" class="canvas"></canvas>
     </div>
