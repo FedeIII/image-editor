@@ -45,7 +45,17 @@ function showLens(event: MouseEvent): void {
   const x = event.offsetX;
   const y = event.offsetY;
 
-  lensCtx.fillRect(0, 0, lensEl.width, lensEl.height);
+  lensCtx.save();
+  lensCtx.beginPath();
+  lensCtx.arc(
+    LENS_WIDTH / 2,
+    LENS_HEIGHT / 2,
+    LENS_WIDTH / 2 - 4,
+    0,
+    Math.PI * 2,
+    false
+  );
+  lensCtx.clip();
   lensCtx.drawImage(
     canvasEl,
     (CANVAS_WIDTH * x) / canvasEl.clientWidth - LENS_WIDTH / LENS_ZOOM / 2,
@@ -57,8 +67,10 @@ function showLens(event: MouseEvent): void {
     LENS_WIDTH,
     LENS_HEIGHT
   );
-  lensEl.style.top = event.pageY - 64 + "px";
-  lensEl.style.left = event.pageX - 64 + "px";
+  lensCtx.restore();
+
+  lensEl.style.left = event.pageX - LENS_WIDTH / 2 + "px";
+  lensEl.style.top = event.pageY - LENS_HEIGHT / 2 + "px";
   lensEl.style.display = "block";
 }
 
