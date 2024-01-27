@@ -1,6 +1,4 @@
 import {
-  CANVAS_HEIGHT,
-  CANVAS_WIDTH,
   CENTRAL_PIXEL_X1,
   HALF_LENS_ZOOM,
   LENS_BORDER,
@@ -31,8 +29,8 @@ function drawCircle(
   lensCtx.clip();
   lensCtx.drawImage(
     canvasEl,
-    (CANVAS_WIDTH * x) / canvasEl.clientWidth - LENS_WIDTH / LENS_ZOOM / 2,
-    (CANVAS_HEIGHT * y) / canvasEl.clientHeight - LENS_WIDTH / LENS_ZOOM / 2,
+    (canvasEl.width * x) / canvasEl.clientWidth - LENS_WIDTH / LENS_ZOOM / 2,
+    (canvasEl.height * y) / canvasEl.clientHeight - LENS_WIDTH / LENS_ZOOM / 2,
     LENS_WIDTH / LENS_ZOOM,
     LENS_HEIGHT / LENS_ZOOM,
     0,
@@ -109,8 +107,8 @@ export function getPixelColor(event: MouseEvent): string {
   const y = event.offsetY;
 
   const imageData = ctx.getImageData(
-    (CANVAS_WIDTH * x) / canvasEl.clientWidth,
-    (CANVAS_HEIGHT * y) / canvasEl.clientHeight,
+    (canvasEl.width * x) / canvasEl.clientWidth,
+    (canvasEl.height * y) / canvasEl.clientHeight,
     1,
     1
   ).data;

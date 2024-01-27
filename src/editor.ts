@@ -86,6 +86,8 @@ export class Editor implements EditorInterface {
     const target = <HTMLInputElement>changeEvent.target;
 
     loadFile(target.files).then((img: HTMLImageElement) => {
+      this.#canvasEl.width = img.width;
+      this.#canvasEl.height = img.height;
       this.#ctx.clearRect(0, 0, this.#canvasEl.width, this.#canvasEl.height);
       this.#ctx.drawImage(img, 0, 0, img.width, img.height);
     });
