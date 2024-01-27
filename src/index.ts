@@ -1,15 +1,11 @@
+import { canvasEl, getPixelColor, lensEl, showLens } from "./canvas";
 import { Editor } from "./editor";
 import { Cursor, ToolName } from "./interfaces/editorElements";
 import { Tool } from "./tools";
-import { getCanvas } from "./canvas";
 
-const { elements, actions } = getCanvas();
-const { canvasEl, lensEl } = elements;
-const { showLens, getPixelColor } = actions;
-
-const inputEl = <HTMLElement>document.getElementById("input");
 
 // EDITOR
+const inputEl = <HTMLElement>document.getElementById("input");
 const toolsEl = <HTMLCanvasElement>document.getElementById("tools");
 const toolDataEl = <HTMLCanvasElement>document.getElementById("tool-data");
 const editor = new Editor(inputEl, toolsEl, toolDataEl, canvasEl, lensEl);
