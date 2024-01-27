@@ -3,6 +3,11 @@ import {
   HALF_LENS_ZOOM,
   LENS_BORDER,
   LENS_HEIGHT,
+  LENS_LABEL_HEIGHT,
+  LENS_LABEL_RADIUS,
+  LENS_LABEL_WIDTH,
+  LENS_LABEL_X,
+  LENS_LABEL_Y,
   LENS_RADIUS,
   LENS_WIDTH,
   LENS_ZOOM,
@@ -58,20 +63,20 @@ function drawPixelGrid(lensCtx: CanvasRenderingContext2D): void {
   lensCtx.beginPath();
 
   // vertical lines
-  let x = LENS_BORDER;
+  let x = LENS_BORDER + HALF_LENS_ZOOM;
   while (x < LENS_WIDTH - LENS_BORDER) {
     const y = getCircleY(x, LENS_RADIUS);
-    lensCtx.moveTo(x + HALF_LENS_ZOOM, LENS_RADIUS - y + LENS_BORDER);
-    lensCtx.lineTo(x + HALF_LENS_ZOOM, LENS_RADIUS + y - LENS_BORDER);
+    lensCtx.moveTo(x, LENS_RADIUS - y + LENS_BORDER);
+    lensCtx.lineTo(x, LENS_RADIUS + y - LENS_BORDER);
     x += LENS_ZOOM; // zoomed pixels per original pixel
   }
 
   // horizontal lines
-  let y = LENS_BORDER;
+  let y = LENS_BORDER + HALF_LENS_ZOOM;
   while (y < LENS_HEIGHT - LENS_BORDER) {
     const x = getCircleY(y, LENS_RADIUS);
-    lensCtx.moveTo(LENS_RADIUS - x + LENS_BORDER, y + HALF_LENS_ZOOM);
-    lensCtx.lineTo(LENS_RADIUS + x - LENS_BORDER, y + HALF_LENS_ZOOM);
+    lensCtx.moveTo(LENS_RADIUS - x + LENS_BORDER, y);
+    lensCtx.lineTo(LENS_RADIUS + x - LENS_BORDER, y);
     y += LENS_ZOOM; // zoomed pixels per original pixel
   }
   lensCtx.stroke();
@@ -88,17 +93,34 @@ function drawPixelGrid(lensCtx: CanvasRenderingContext2D): void {
   lensCtx.restore();
 }
 
+function drawText(lensCtx: CanvasRenderingContext2D, text: string) {
+  lensCtx.save();
+  lensCtx.beginPath();
+  lensCtx.roundRect(
+    LENS_LABEL_X,
+    LENS_LABEL_Y,
+    LENS_LABEL_WIDTH,
+    LENS_LABEL_HEIGHT,
+    LENS_LABEL_RADIUS
+  );
+  lensCtx.fillStyle = "gray";
+  lensCtx.fill();
+  lensCtx.font = "10px monospace";
+  lensCtx.fillStyle = "white";
+  lensCtx.fillText(text, 42, 104);
+  lensCtx.restore();
+}
+
 function positionLens(lensEl: HTMLCanvasElement, event: MouseEvent): void {
   lensEl.style.left = event.pageX - LENS_WIDTH / 2 + "px";
   lensEl.style.top = event.pageY - LENS_HEIGHT / 2 + "px";
   lensEl.style.display = "block";
 }
 
-export function showLens(event: MouseEvent): void {
+export function showLens(event: MouseEvent, text: string): void {
   drawCircle(lensCtx, canvasEl, event);
-
   drawPixelGrid(lensCtx);
-
+  drawText(lensCtx, text);
   positionLens(lensEl, event);
 }
 

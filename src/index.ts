@@ -3,7 +3,6 @@ import { Editor } from "./editor";
 import { Cursor, ToolName } from "./interfaces/editorElements";
 import { Tool } from "./tools";
 
-
 // EDITOR
 const inputEl = <HTMLElement>document.getElementById("input");
 const toolsEl = <HTMLCanvasElement>document.getElementById("tools");
@@ -29,8 +28,9 @@ const colorPicker = new Tool(
 );
 
 colorPicker.setUse((event: MouseEvent) => {
-  showLens(event);
-  return getPixelColor(event);
+  const hexColor: string = getPixelColor(event);
+  showLens(event, hexColor);
+  return hexColor;
 });
 
 colorPicker.setClear(() => {
