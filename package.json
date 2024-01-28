@@ -6,8 +6,7 @@
   "scripts": {
     "build": "rollup --config",
     "dev": "rollup --config --watch",
-    "demo": "open index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "demo": "open index.html"
   },
   "keywords": [],
   "author": "",
