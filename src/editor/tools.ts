@@ -1,4 +1,4 @@
-import { Cursor, ToolInterface, ToolName } from "./interfaces/editorElements";
+import { Cursor, ToolInterface, ToolName } from "../interfaces/tools";
 
 export class Tool implements ToolInterface {
   cursor: Cursor;

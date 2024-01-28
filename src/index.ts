@@ -6,9 +6,9 @@ import {
   zoomIn,
   zoomOut,
 } from "./canvas";
-import { Editor } from "./editor";
-import { Cursor, ToolName } from "./interfaces/editorElements";
-import { Tool } from "./tools";
+import { Editor } from "./editor/editor";
+import { Cursor, ToolName } from "./interfaces/tools";
+import { Tool } from "./editor/tools";
 
 // EDITOR
 const inputEl = <HTMLElement>document.getElementById("input");

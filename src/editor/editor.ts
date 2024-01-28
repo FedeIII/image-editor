@@ -1,6 +1,6 @@
-import { loadFile } from "./fileReader";
-import { EditorInterface, EditorTools } from "./interfaces/editor";
-import { ToolInterface, ToolName } from "./interfaces/editorElements";
+import { loadFile } from "../utils";
+import { EditorInterface, EditorTools } from "../interfaces/editor";
+import { ToolInterface, ToolName } from "../interfaces/tools";
 import { Tool } from "./tools";
 
 export class Editor implements EditorInterface {

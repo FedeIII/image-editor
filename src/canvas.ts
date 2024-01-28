@@ -11,7 +11,7 @@ import {
   LENS_RADIUS,
   LENS_WIDTH,
   LENS_ZOOM,
-} from "./config";
+} from "./editor/config";
 import { rgbToHex } from "./utils";
 
 export const canvasEl = <HTMLCanvasElement>document.getElementById("canvas");

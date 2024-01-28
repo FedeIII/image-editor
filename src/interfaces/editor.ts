@@ -1,4 +1,4 @@
-import { ToolInterface } from "./editorElements";
+import { ToolInterface } from "./tools";
 
 export interface EditorTools {
   [key: string]: ToolInterface;
