@@ -19,6 +19,10 @@
         --color-text-negative: white;
       }
 
+      body {
+        margin: 0;
+      }
+
       .app {
         background-color: var(--color-base);
         display: flex;
@@ -26,6 +30,8 @@
         justify-content: flex-start;
         align-items: stretch;
         font-family: monospace;
+        width: 100vw;
+        height: 100vh;
       }
 
       .menu {
@@ -33,14 +39,32 @@
         margin: 0 var(--gap-huge);
       }
 
+      .canvas-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 0 var(--gap-huge) var(--gap-huge) var(--gap-huge);
+        overflow: scroll;
+      }
+
       .canvas {
         position: relative;
-        margin: 0 var(--gap-huge) var(--gap-huge) var(--gap-huge);
       }
 
       .canvas--color-picker {
         cursor:
           url("public/img/screenshotselection.svg") 16 16,
+          pointer;
+      }
+
+      .canvas--zoom-in {
+        cursor:
+          url("public/img/zoom-in.svg") 5 5,
+          pointer;
+      }
+
+      .canvas--zoom-out {
+        cursor:
+          url("public/img/zoom-out.svg") 5 5,
           pointer;
       }
 
@@ -115,8 +139,10 @@
           <div id="tool-data" class="tool-data"></div>
         </div>
       </div>
-      <canvas id="canvas" width="1920" height="1080" class="canvas"></canvas>
-      <canvas id="lens" width="128" height="128" class="lens"></canvas>
+      <div class="canvas-wrapper">
+        <canvas id="canvas" width="1920" height="1080" class="canvas"></canvas>
+        <canvas id="lens" width="128" height="128" class="lens"></canvas>
+      </div>
     </div>
     <script src="dist/index.js"></script>
   </body>

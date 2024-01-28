@@ -137,3 +137,13 @@ export function getPixelColor(event: MouseEvent): string {
 
   return rgbToHex(imageData[0], imageData[1], imageData[2]);
 }
+
+export function zoomIn(): void {
+  canvasEl.style.width = canvasEl.width + "px";
+  canvasEl.style.height = canvasEl.height + "px";
+}
+
+export function zoomOut(): void {
+  canvasEl.style.width = "auto"
+  canvasEl.style.height = "auto"
+}

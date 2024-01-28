@@ -8,7 +8,6 @@ export class Editor implements EditorInterface {
   #toolsEl: HTMLElement;
   #toolDataEl: HTMLElement;
   #canvasEl: HTMLCanvasElement;
-  #lensEl: HTMLCanvasElement;
   #ctx: CanvasRenderingContext2D;
 
   #tools: EditorTools = {};
@@ -18,14 +17,12 @@ export class Editor implements EditorInterface {
     inputEl: HTMLElement,
     toolsEl: HTMLElement,
     toolDataEl: HTMLElement,
-    canvasEl: HTMLCanvasElement,
-    lensEl: HTMLCanvasElement
+    canvasEl: HTMLCanvasElement
   ) {
     this.#inputEl = inputEl;
     this.#toolsEl = toolsEl;
     this.#toolDataEl = toolDataEl;
     this.#canvasEl = canvasEl;
-    this.#lensEl = lensEl;
     this.#ctx = <CanvasRenderingContext2D>canvasEl.getContext("2d");
 
     this.#setEventListeners();
@@ -88,7 +85,7 @@ export class Editor implements EditorInterface {
     loadFile(target.files).then((img: HTMLImageElement) => {
       this.#canvasEl.width = img.width;
       this.#canvasEl.height = img.height;
-      this.#ctx.clearRect(0, 0, this.#canvasEl.width, this.#canvasEl.height);
+      this.#ctx.clearRect(0, 0, img.width, img.height);
       this.#ctx.drawImage(img, 0, 0, img.width, img.height);
     });
   }

@@ -17,6 +17,7 @@ export interface ToolInterface {
   isDragging(): boolean;
   undrag(): void;
   setUse(callback: (event: MouseEvent) => string | null): void;
+  setCursorStyle(callback: (toolText: string) => string): void;
   getCursorStyle(toolText: string | null): string;
   setClear(callback: () => void): void;
 }
@@ -24,4 +25,6 @@ export interface ToolInterface {
 export enum ToolName {
   NO_TOOL = "no-tool",
   COLOR_PICKER = "color-picker",
+  ZOOM_IN = "zoom-in",
+  ZOOM_OUT = "zoom-out",
 }
