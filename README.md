@@ -18,6 +18,10 @@ npm run dev
 npm run build
 npm run demo
 ```
+### To pass tests
+```
+npm run test
+```
 
 ## File explanation
 - [index.html](../index.html): Static html and css rules.
@@ -46,11 +50,4 @@ npm run demo
 
 ## To Do
 - Zoom-in gets the cursor position to scroll the image vertically and horizontally for that point to be centered after the zoom.
-- E2E tests:
-  - When a tool is added
-    - its icon "el" is present in the DOM.
-  - When an image is loaded
-    - a snapshot of the editor with the image matches.
-  - Given a stub image is loaded and the color picker tool is selected
-    - When a certail pixel is clicked on
-    - the correspondent HEX code is shown at the tool bar.
+- Zoom-in & out really zooms in & out, changing the drawImage mapping when rendering the image

@@ -6,7 +6,9 @@
   "scripts": {
     "build": "rollup --config",
     "dev": "rollup --config --watch",
-    "demo": "open index.html"
+    "demo": "open index.html",
+    "cy:open": "cypress open",
+    "test": "cypress run"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "type": "module",
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
+    "cypress": "^13.6.3",
     "prettier": "3.2.4",
     "rollup": "^4.9.6",
     "tslib": "^2.6.2",
