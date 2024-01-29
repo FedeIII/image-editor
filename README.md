@@ -43,3 +43,14 @@ npm run demo
   - **Color picker**: Pick a color code from the image. Shows a lens for better precision. The color code appears at the tool bar and inside the lens.
   - **Zoom in**: renders the image in the canvas with the real DOM resolution. *You have to click on the image to use it.*
   - **Zoom out**: renders the image in the canvas with a resolution that fits the window (default). *You have to click on the image to use it.*
+
+## To Do
+- Zoom-in gets the cursor position to scroll the image vertically and horizontally for that point to be centered after the zoom.
+- E2E tests:
+  - When a tool is added
+    - its icon "el" is present in the DOM.
+  - When an image is loaded
+    - a snapshot of the editor with the image matches.
+  - Given a stub image is loaded and the color picker tool is selected
+    - When a certail pixel is clicked on
+    - the correspondent HEX code is shown at the tool bar.
