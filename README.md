@@ -4,21 +4,24 @@ This is a prototype of a web-based image editor
 
 ## Dev environment
 
-Rollup is used to compile and bundle the frontend code
+Rollup is used to compile and bundle the frontend code.
 ```
 npm install
 ```
 ### For development
+Watches over the files (needs manual browser refreshing) to recompile:
 ```
 npm run demo
 npm run dev
 ```
 ### To demo
+One-time build to demo the app:
 ```
 npm run build
 npm run demo
 ```
 ### To pass tests
+Runs the e2e tests with cypress:
 ```
 npm run test
 ```
